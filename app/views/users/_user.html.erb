@@ -1,4 +1,12 @@
 <div id="<%= dom_id user %>">
+  <!-- <%= image_tag user.avatar_image, class: "w-40 h-40 mb-4 rounded-full" if user.avatar.attached? %> -->
+
+  <% if user.avatar.attached? %>
+    <%= image_tag user.avatar, class: "w-40 h-40 mb-4 rounded-full" %>
+  <% else %>
+    <%= image_tag "default-avatar.png", class: "w-40 h-40 mb-4 rounded-full" %>
+  <% end %>
+
   <p class="my-5">
     <strong class="block font-medium mb-1">Name:</strong>
     <%= user.name %>

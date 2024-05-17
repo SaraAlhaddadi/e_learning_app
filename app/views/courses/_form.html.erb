@@ -21,9 +21,14 @@
     <%= form.text_area :description, rows: 4, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
 
-  <div class="my-5">
+  <!-- <div class="my-5">
     <%= form.label :instructor_id %>
     <%= form.text_field :instructor_id, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
+  </div> -->
+
+  <div class="my-5">
+    <%= form.label :instructor_id %>
+    <%= form.collection_select :instructor_id, User.teacher.all, :id, :name, { prompt: "Select an instructor" }, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
 
   <div class="inline">

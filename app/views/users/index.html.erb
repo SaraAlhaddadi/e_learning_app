@@ -3,19 +3,29 @@
     <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
   <% end %>
 
-  <% content_for :title, "Users" %>
+  <% content_for :title, "All Users" %>
 
   <div class="flex justify-between items-center">
     <h1 class="font-bold text-4xl">Users</h1>
     <%= link_to "New user", new_user_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
   </div>
 
-  <div id="users" class="min-w-full">
+  <div id="users" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
     <% @users.each do |user| %>
-      <%= render user %>
-      <p>
-        <%= link_to "Show this user", user, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-      </p>
+      <div class="bg-white shadow-lg rounded-lg p-6">
+        <%= render user %>
+        <!-- <% if user.avatar&.attached? %>
+        <%= image_tag user.avatar, class: "w-40 h-40 mb-4 rounded-full"%>
+        <% else %>
+          <%= image_tag "default-avatar.png", class: "w-full mb-4 rounded-full" %>
+        <% end %>
+        <h3 class="text-xl font-bold mb-2"><%= user.name %></h3>
+        <p class="text-gray-600"><%= user.email %></p>
+        <p class="text-gray-600"><%= user.role %></p> -->
+        <p>
+          <%= link_to "Show this user", user, class: "mt-4 bg-gray-100 hover:bg-gray-200 text-gray-800 px-4 py-2 rounded-md inline-block" %>
+        </p>
+      </div>
     <% end %>
   </div>
 </div>

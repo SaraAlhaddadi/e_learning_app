@@ -27,8 +27,13 @@
   </div>
 
   <div class="my-5">
-    <%= form.label :role %>
-    <%= form.number_field :role, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
+    <%= form.label :role, class: "block font-medium mb-2" %>
+    <%= form.select :role, User.roles.keys.map { |role| [role.capitalize, role] }, {}, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :avatar %>
+    <%= form.file_field :avatar , class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full"%>
   </div>
 
   <div class="inline">
