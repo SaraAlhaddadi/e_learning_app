@@ -15,14 +15,23 @@
     <nav class="bg-blue-500 py-4">
       <div class="container mx-auto flex justify-between items-center">
         <div>
-          <%= link_to "E-learning website", root_path, class: "text-white font-semibold text-lg" %>
+          <%= button_to "E-learning website", root_path, class: "text-white font-semibold text-lg", method: :get %>
         </div>
-        <div>
-          <%= link_to "Courses", courses_path, class: "text-white hover:text-blue-200 ml-4" %>
-          <%= link_to "Users", users_path, class: "text-white hover:text-blue-200 ml-4" %>
+        <div class="flex items-center">
+          <%= button_to "Courses", courses_path, class: "text-white hover:text-blue-200 mr-4", method: :get %>
+          <%= button_to "Users", users_path, class: "text-white hover:text-blue-200 mr-4", method: :get %>
+          <% if user_signed_in? %>
+            <div class="mr-4 text-white hover:text-blue-200">Welcome <%= current_user.name %></div>
+            <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "text-white hover:text-blue-200"%>
+          <% else %>
+            <%= button_to "Sign in", new_user_session_path, class: "text-white hover:text-blue-200 mr-4" %>
+          <% end %>
         </div>
       </div>
     </nav>
+
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
 
     <main class="container mx-auto mt-28 px-5 flex">
       <%= yield %>
