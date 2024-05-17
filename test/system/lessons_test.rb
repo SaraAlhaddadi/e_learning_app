@@ -25,7 +25,7 @@ class LessonsTest < ApplicationSystemTestCase
   end
 
   test "should update Lesson" do
-    visit lesson_url(@lesson)
+    visit course_lesson_url(@course, @lesson)
     click_on "Edit this lesson", match: :first
 
     fill_in "Content", with: @lesson.content
@@ -39,7 +39,7 @@ class LessonsTest < ApplicationSystemTestCase
   end
 
   test "should destroy Lesson" do
-    visit lesson_url(@lesson)
+    visit course_lesson_url(@course, @lesson)
     click_on "Destroy this lesson", match: :first
 
     assert_text "Lesson was successfully destroyed"

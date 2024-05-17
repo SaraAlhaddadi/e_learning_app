@@ -1,4 +1,4 @@
-<div class="mx-auto md:w-2/3 w-full flex">
+<div class="mx-auto md:w-2/3 w-full">
   <div class="mx-auto">
     <% if notice.present? %>
       <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
@@ -6,10 +6,44 @@
 
     <%= render @course %>
 
-    <%= link_to "Edit this course", edit_course_path(@course), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-    <%= link_to "Back to courses", courses_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-    <div class="inline-block ml-2">
-      <%= button_to "Destroy this course", @course, method: :delete, class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium" %>
+    <% if current_user && (current_user.admin? || (current_user.teacher? && current_user == @course.instructor)) %>
+    <div class="my-5">
+      <%= link_to "Edit this course", edit_course_path(@course), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+      <div class="inline-block ml-2">
+        <%= button_to "Destroy this course", @course, method: :delete, class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium" %>
+      </div>
     </div>
+  <% end %>
+
+    <%= link_to "Back to courses", courses_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+   
   </div>
+
+  <h3 class="my-5 font-bold">Lessons:</h3>
+  <% if @course.lessons.any? %>
+    <ul class="my-5">
+      <% @course.lessons.each do |lesson| %>
+        <li>
+          <%= link_to lesson.title, course_lesson_path(@course, lesson) %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p class="my-5">No lessons found for this course.</p>
+  <% end %>
+
+  <%= link_to "Back to lessons", course_lessons_path(@course.id), class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+
+
+  <% if current_user && current_user.student? && @course.enrolled_users.exclude?(current_user) %>
+    <%= form_with(url: enrollment_path, method: :post, class: "my-5") do |f| %>
+      <%= f.hidden_field :user_id, value: current_user.id %>
+      <%= f.hidden_field :course_id, value: @course.id %>
+      <%= f.submit "Enroll", class: "bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded" %>
+    <% end %>
+  <% end %>
+
+  <% if flash[:success] %>
+    <p class="my-5 text-green-500"><%= flash[:success] %></p>
+  <% end %>
 </div>

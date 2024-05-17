@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
   get 'home/home'
-  resources :tests
   resources :enrollments
-  resources :lessons
-  resources :courses
+  resources :courses do
+    resources :lessons
+    resources :tests
+  end
   scope '/admin' do
     resources :users
   end

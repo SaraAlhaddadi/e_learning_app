@@ -1,4 +1,13 @@
 <div id="<%= dom_id lesson %>">
+  <% if lesson.image.attached? %>
+    <%= image_tag lesson.image, class: "w-40 h-40 mb-4 rounded-full" %>
+  <% end %>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Course:</strong>
+    <%= lesson.course.title %>
+  </p>
+
   <p class="my-5">
     <strong class="block font-medium mb-1">Title:</strong>
     <%= lesson.title %>
@@ -8,15 +17,4 @@
     <strong class="block font-medium mb-1">Content:</strong>
     <%= lesson.content %>
   </p>
-
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Image:</strong>
-    <%= lesson.image %>
-  </p>
-
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Course:</strong>
-    <%= lesson.course_id %>
-  </p>
-
 </div>

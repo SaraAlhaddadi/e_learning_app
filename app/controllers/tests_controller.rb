@@ -1,9 +1,10 @@
 class TestsController < ApplicationController
+  before_action :set_course
   before_action :set_test, only: %i[ show edit update destroy ]
 
   # GET /tests or /tests.json
   def index
-    @tests = Test.all
+    @tests = @course.tests
   end
 
   # GET /tests/1 or /tests/1.json
@@ -12,7 +13,7 @@ class TestsController < ApplicationController
 
   # GET /tests/new
   def new
-    @test = Test.new
+    @test = @course.tests.new
   end
 
   # GET /tests/1/edit
@@ -21,7 +22,7 @@ class TestsController < ApplicationController
 
   # POST /tests or /tests.json
   def create
-    @test = Test.new(test_params)
+    @test = @course.tests.new(test_params)
 
     respond_to do |format|
       if @test.save
@@ -61,6 +62,10 @@ class TestsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_test
       @test = Test.find(params[:id])
+    end
+
+    def set_course
+      @course = Course.find(params[:course_id])
     end
 
     # Only allow a list of trusted parameters through.

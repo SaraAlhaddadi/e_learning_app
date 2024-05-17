@@ -24,7 +24,7 @@ class LessonsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should show lesson" do
-    get lesson_url(@lesson)
+    get course_lesson_url(@course, @lesson)
     assert_response :success
   end
 
@@ -34,13 +34,13 @@ class LessonsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update lesson" do
-    patch lesson_url(@lesson), params: { lesson: { content: @lesson.content, course_id: @lesson.course_id, image: @lesson.image, title: @lesson.title } }
-    assert_redirected_to lesson_url(@lesson)
+    patch course_lesson_url(@course, @lesson), params: { lesson: { content: @lesson.content, course_id: @lesson.course_id, image: @lesson.image, title: @lesson.title } }
+    assert_redirected_to course_lesson_url(@course, @lesson)
   end
 
   test "should destroy lesson" do
     assert_difference("Lesson.count", -1) do
-      delete lesson_url(@lesson)
+      delete course_lesson_url(@course, @lesson)
     end
 
     assert_redirected_to lessons_url
