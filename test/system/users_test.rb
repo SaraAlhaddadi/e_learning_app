@@ -16,7 +16,6 @@ class UsersTest < ApplicationSystemTestCase
 
     fill_in "Email", with: @user.email
     fill_in "Name", with: @user.name
-    fill_in "Password digest", with: @user.password_digest
     fill_in "Role", with: @user.role
     click_on "Create User"
 
@@ -30,7 +29,6 @@ class UsersTest < ApplicationSystemTestCase
 
     fill_in "Email", with: @user.email
     fill_in "Name", with: @user.name
-    fill_in "Password digest", with: @user.password_digest
     fill_in "Role", with: @user.role
     click_on "Update User"
 
